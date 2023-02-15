@@ -1,0 +1,30 @@
+version: 0.2
+run-as: root
+
+phases:
+  install:
+    commands:
+      - pip install -r requirements.txt
+  pre_build:
+    commands:
+      - echo Initializing environment
+      # run pytest here
+      - "echo Logging in to Amazon ECR..."
+      - "$(aws ecr get-login --region eu-central-1 --no-include-email)"
+      - "REPOSITORY_URI=ACCOUNT_ID_TO_BE_REPLACED.dkr.ecr.eu-central-1.amazonaws.com/flaskwebserver:latest"
+  build:
+    commands:
+      - "echo Build started on `date`"
+      - docker image build -t flask_docker:latest .
+      - docker tag flask_docker:latest ACCOUNT_ID_TO_BE_REPLACED.dkr.ecr.eu-central-1.amazonaws.com/flaskwebserver:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - "echo Pushing the Docker image..."
+      - "docker push ACCOUNT_ID_TO_BE_REPLACED.dkr.ecr.eu-central-1.amazonaws.com/flaskwebserver"
+      - "echo Push the latest image to cluster"
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/**/*
+  name: flaskserver.zip

@@ -1,0 +1,43 @@
+version: 0.1
+run-as: root
+phases:
+
+  install:
+    commands:
+      - "curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl"  
+      - "chmod +x ./kubectl"
+      - "mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin"
+      - "echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc"
+      - "source ~/.bashrc"
+      - "echo 'Check kubectl version'"
+      - "kubectl version --short --client"
+      
+  build:
+    commands:
+      - "ls"
+      - "echo Build started on `date`"
+      - "echo Building the Docker image..."
+      - "docker build -t nodeserver ."
+      - "docker tag nodeserver:latest YOUR_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/nodeserver:latest"
+      
+  post_build:
+    commands:
+      - "echo Build completed on `date`"
+      - "echo Pushing the Docker image..."
+      - "docker push YOUR_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/nodeserver:latest"
+      - "echo Push the latest image to cluster"
+      - "kubectl rollout restart deploy webapp"
+      - "kubectl apply -f manifest.yaml"
+      - "kubectl get svc --all-namespaces"
+      
+  pre_build:
+    commands:
+      - "echo Logging into Amazon EKS...."
+      - "aws eks --region eu-central-1 update-kubeconfig --name eks-demo-cicd"
+      - "echo check config "
+      - "kubectl config view --minify"
+      - "echo check kubectl access"
+      - "kubectl get svc"
+      - "echo Logging in to Amazon ECR..."
+      - "$(aws ecr get-login --region eu-central-1 --no-include-email)"
+      - "REPOSITORY_URI=YOUR_ACCOUNT_ID.dkr.ecrcentral.amazonaws.com/nodeserver:latest"
