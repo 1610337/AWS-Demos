@@ -25,7 +25,7 @@ Average Response time             |  Concurrent Executions
 
 Failed Lambdas             |  Successful Lambdas
 :-------------------------:|:-------------------------:
-![](images/failures.jpg)  |  ![](images/success.jpg )
+![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/failures.jpg)  |  ![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/success.jpg )
 
 
 ![Setup](images/simple_test_results.jpg "Setup")
