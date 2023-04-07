@@ -21,13 +21,13 @@ The last screenshot shows similar metrics from within the loadtesting applicatio
 
 Average Response time             |  Concurrent Executions
 :-------------------------:|:-------------------------:
-![](images/avg_response_time.jpg)  |  ![](images/concurrent_executions.jpg )
+![](images/avg_response_time.JPG)  |  ![](images/concurrent_executions.JPG )
 
 Failed Lambdas             |  Successful Lambdas
 :-------------------------:|:-------------------------:
-![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/failures.jpg)  |  ![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/success.jpg )
+![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/failures.JPG)  |  ![](https://raw.githubusercontent.com/1610337/AWS-Demos/master/loadTestLambda/images/success.JPG )
 
 
-![Setup](images/simple_test_results.jpg "Setup")
+![Setup](images/simple_test_results.JPG "Setup")
 *Screenshot of LoadTesting Framework for the first load test (Lambda execution time was set to 2.5 seconds)*
 

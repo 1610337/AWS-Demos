@@ -8,7 +8,7 @@ Please remember to change the timeout of the Lambda function to at least the run
 
 </br>
 Image 1: What this template will deploy
-<img src="../images/api_lambda.jpg"  width="50%">
+<img src="../images/api_lambda.JPG"  width="50%">
 <figcaption>Image 1: What this template will deploy</figcaption>
 </br>
 
