@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template for imageRek
+
+Globals:
+  Function:
+    Timeout: 5
+
+Parameters:
+  DynamoTableName:
+    Type: String
+    Description: Enter DynamoTableName
+  LambdaName:
+    Type: String
+    Description: Enter LambdaName
+  BucketNamePa:
+    Type: String
+    Description: Enter BucketNamePa
+  arnToLambdaRole:
+    Type: String
+    Description: Lambda will need a role to put items into DDB
+
+Resources:
+  mainLambdaFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: !Ref LambdaName
+      Role: !Ref arnToLambdaRole
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Timeout: 10
+      Environment:
+        Variables:
+          dynamoTable: !Ref DynamoTableName
+          bucketName: !Ref BucketNamePa
+      Events:
+        FileUpload:
+          Type: S3
+          Properties: 
+            Bucket: !Ref S3Bucket
+            Events: s3:ObjectCreated:*
+
+  UsersDynamoDbTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: celebrity_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: celebrity_name
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: !Ref DynamoTableName
+
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketNamePa
+
+
