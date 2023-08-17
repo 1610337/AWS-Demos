@@ -5,7 +5,12 @@ The compute resources will be deployed into a vpc of choice (based on the parame
 The main purpose of this template is to showcase more advanced functionalities of CloudFormation. **Important:** This template is not ready to be used
 in any production scenario!
 
-## Good tools 
+## How to deploy this template:
+1. Replace the bucket urls in global.yaml to a bucket that you own
+2. Upload all files into the referenced bucket
+3. Deploy the template through CloudFormation by referencing the public s3 url to global.yaml (the bucket can stay private) 
+
+## Good tools: 
 **TaskCat:** 
 https://github.com/aws-ia/taskcat
 
@@ -25,5 +30,5 @@ Validate AWS CloudFormation yaml/json templates against the AWS CloudFormation R
 Upload all files of current directory to S3
 ```aws s3 sync . s3://my-bucket/path```
 
-## Future work
+## Future work:
 This template offers a good foundation to showcase cfn-helper scripts
