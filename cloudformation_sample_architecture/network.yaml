@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: devops_network
+
+Parameters:
+  VPCID:
+    Type: String
+    
+Resources:
+  SecGrpEc2:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: SecGrpEc2
+      GroupDescription: Security Group for an Ec2 instance
+      VpcId: !Ref VPCID
+      Tags:
+        - Key: Name
+          Value: SecGrpEc2
+        - Key: Demo
+          Value: DevOpsCICD
+  LabSecGroupRule1:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: !Ref SecGrpEc2
+      IpProtocol: tcp
+      FromPort: '80'
+      ToPort: '80'
+      CidrIp: 0.0.0.0/0
+  LabSecGroupRule2:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      GroupId: !Ref SecGrpEc2
+      IpProtocol: tcp
+      FromPort: '22'
+      ToPort: '22'
+      CidrIp: 0.0.0.0/0
+  LabSecGroupRule3:
+    Type: 'AWS::EC2::SecurityGroupEgress'
+    Properties:
+      GroupId: !Ref SecGrpEc2
+      IpProtocol: '-1'
+      CidrIp: 0.0.0.0/0
+Outputs:
+  SecGrpId:
+    Value: !Ref SecGrpEc2

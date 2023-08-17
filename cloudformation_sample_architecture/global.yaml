@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: devops_global
+
+Parameters:
+  VPCID:
+    Type: String
+    Description: Enter the VPC ID into which you want to deploy
+  Subnet1:
+    Type: String
+    Description: One public subnet in the selected VPC
+  Subnet2:
+    Type: String
+    Description: Another public subnet in a different Availability Zones in the selected VPC
+
+Resources:
+  SecurityStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: >-
+        https://YOUR_S3_BUCKET_NAME+REGION.amazonaws.com/demos/cloudformation/security.yaml
+  NetworkStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        VPCID: !Ref VPCID
+      TemplateURL: >-
+        https://YOUR_S3_BUCKET_NAME+REGION.amazonaws.com/demos/cloudformation/network.yaml
+  ComputeStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        SecGrpId: !GetAtt
+          - NetworkStack
+          - Outputs.SecGrpId
+        VPCID: !Ref VPCID
+        Subnet1: !Ref Subnet1
+        Subnet2: !Ref Subnet2
+      TemplateURL: >-
+       https://dYOUR_S3_BUCKET_NAME+REGION.amazonaws.com/demos/cloudformation/compute.yaml
