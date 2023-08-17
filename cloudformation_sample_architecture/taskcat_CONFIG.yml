@@ -1,0 +1,15 @@
+*** SAMPLE CONFIGURATION OF TASKCAT ***
+*** THIS FILE NEEDS TO BE STORED AS .taskcat ***
+*** PLEASE DELETE THESE FIRST 3 LINES ***
+
+project:
+  name: my-project
+  regions:
+  - eu-central-1
+  parameters:
+    VPCID: 'YOUR_VPC_ID'
+    Subnet1: 'YOUR_SUB1_ID'
+    Subnet2: 'YOUR_SUB2_ID'
+tests:
+  default:
+    template: ./global.yaml
