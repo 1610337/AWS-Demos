@@ -1,0 +1,89 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAdminAccess",
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenySpecificBucket",
+            "Effect": "Deny",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::name-of-bucket-that-contains-secrets"
+        },
+        {
+            "Sid": "DenyToChangeThisPolicy",
+            "Effect": "Deny",
+            "Action": [
+                "iam:DeletePolicy",
+                "iam:DeletePolicyVersion",
+                "iam:CreatePolicyVersion",
+                "iam:SetDefaultPolicyVersion"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:policy/ScopePermissions"
+            ]
+        },
+        {
+            "Sid": "DenyToRemoveThisPolicyFromAnything",
+            "Effect": "Deny",
+            "Action": [
+                "iam:DeleteUserPermissionsBoundary",
+                "iam:DeleteRolePermissionsBoundary"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:user/*",
+                "arn:aws:iam::111122223333:role/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "iam:PermissionsBoundary": "arn:aws:iam::111122223333:policy/ScopePermissions"
+                }
+            }
+        },
+        {
+            "Sid": "DenyUsageOfAnyOtherPermissionsBoundary",
+            "Effect": "Deny",
+            "Action": [
+                "iam:PutUserPermissionsBoundary",
+                "iam:PutRolePermissionsBoundary"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:user/*",
+                "arn:aws:iam::111122223333:role/*"
+            ],
+            "Condition": {
+                "StringNotEquals": {
+                    "iam:PermissionsBoundary": "arn:aws:iam::111122223333:policy/ScopePermissions"
+                }
+            }
+        },
+        {
+            "Sid": "DenyCreatingNewUsersWithoutThisBoundary",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateUser",
+                "iam:CreateRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:user/*",
+                "arn:aws:iam::111122223333:role/*"
+            ],
+            "Condition": {
+                "StringNotEquals": {
+                    "iam:PermissionsBoundary": "arn:aws:iam::111122223333:policy/ScopePermissions"
+                }
+            }
+        },
+        {
+            "Sid": "DenyToPassRoles",
+            "Effect": "Deny",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::111122223333:role/*"
+        }
+    ]
+}
