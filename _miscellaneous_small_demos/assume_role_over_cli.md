@@ -1,5 +1,5 @@
 
-### Assume roles over the CLI
+### Assume a role over the CLI
 
 This is a walkthrough of how to assume a role using the CLI. This can be used to showcase the temporary credentials issued by the sts service.
 
