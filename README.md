@@ -10,4 +10,4 @@ Each folder in this repository contains a standalone demo/prototype and is self-
 
 #### 📫 questions?
 
-Feel free to reach out to me through my reffered LinkedIn profile in my GitHub profile section.
+Feel free to reach out to me via LinkedIn  - you can find the link in my GitHub profile section.
