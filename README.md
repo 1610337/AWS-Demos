@@ -4,7 +4,7 @@ This repository shares some of my demos/prototypes that I built for various occa
 
 #### 📁 repo structure
 
-Each folder in this repository contains a standalone demo/prototype and is self-contained. The only exception to this is the `_miscellaneous_small_demos folder`. Please refer to the individual Readme.md files within the folders for further information.
+Each folder in this repository contains a standalone demo/prototype and is self-contained. The only exception to this is the `_miscellaneous_small_demos` and the `_miscellaneous_whiteboards` folder. Please refer to the individual Readme.md files within the folders for further information.
 
 
 
