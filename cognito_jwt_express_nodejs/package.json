@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.7",
+    "cognito-express": "^3.0.3",
+    "express": "^4.18.2"
+  }
+}
