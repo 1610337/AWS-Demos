@@ -16,4 +16,4 @@ https://YOUR_COGNITO_SIGNIN_DOMAINNAME.auth.YOUR_REGION.amazoncognito.com/login?
 This is WIP. It'd be good to explain the different tokens a bit more and how they are being used in here (using graphics). For the codebase it'd be worth to implemnt a token refresh functionality. Another idea is to automatically open the UI that is hosted by Cognito by clicking some sort of button in the index.html.
 
 #### Thanks
-Special thanks to the countless blogposts and questions on Stackoverflow that helped here. Sadly I can't recall all of them anymore.
+Special thanks to the a good number of blogposts and Stackoverflow discussions. Sadly I can't recall all of them anymore.
