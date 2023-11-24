@@ -15,4 +15,4 @@ the Signin UI hosted by Cognito - through a link that looks like the following:
 https://YOUR_COGNITO_SIGNIN_DOMAINNAME.auth.YOUR_REGION.amazoncognito.com/login?client_id=CLIENT_ID_OF_YOUR_CLIENT&response_type=token&redirect_uri=http://localhost:3000/
 
 ## To Do
-This is WIP. It'd be good to explain the different tokens a bit more and how they are being used in here (using graphics). For the codebase it'd be worth to implemnt a token refresh functionality.
+This is WIP. It'd be good to explain the different tokens a bit more and how they are being used in here (using graphics). For the codebase it'd be worth to implemnt a token refresh functionality. Another idea is to automatically open the UI that is hosted by Cognito by clicking some sort of button in the index.html.
